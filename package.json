@@ -31,7 +31,8 @@
     "db:migrate:test": "npm run db:migrate:test --workspace @pos/api",
     "db:status": "npm run db:status --workspace @pos/api",
     "db:status:test": "npm run db:status:test --workspace @pos/api",
-    "db:seed:demo": "npm run db:seed:demo --workspace @pos/api --"
+    "db:seed:demo": "npm run db:seed:demo --workspace @pos/api --",
+    "start": "node cpanel-start.cjs"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
