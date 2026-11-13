@@ -1,0 +1,3 @@
+{$POS_DOMAIN} {
+  reverse_proxy hub:4000
+}

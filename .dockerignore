@@ -1,0 +1,23 @@
+node_modules
+**/node_modules
+**/dist
+**/.env
+.env
+.git
+local-data
+Kenya POS Delivery*
+*.zip
+*.exe
+*.cmd
+docs
+tests
+**/*.pem
+**/clients.sqlite*
+**/issued-licenses.jsonl
+
+TillSawa Delivery*
+TillSawa Cloud Deployment*
+Incomplete Packaging*
+**/.env.*
+
+!apps/api/data/license-public-key.pem

@@ -1,0 +1,18 @@
+{
+  "name": "TillSawa Platform",
+  "short_name": "TillSawa",
+  "description": "Sales, stock and business management for Kenyan shops",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f8fb",
+  "theme_color": "#0b1f3a",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

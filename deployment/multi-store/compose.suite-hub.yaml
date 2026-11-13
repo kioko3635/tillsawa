@@ -1,0 +1,19 @@
+# Use with the reporting project on a shared server.
+services:
+  hub:
+    networks:
+      default:
+        aliases:
+          - tillsawa-owner-reporting
+  gateway:
+    environment:
+      POS_CHECKOUT_DOMAIN: ${POS_CHECKOUT_DOMAIN:?Set the separate checkout domain}
+    volumes:
+      - ./Caddyfile.suite:/etc/caddy/Caddyfile:ro
+    networks:
+      - default
+      - tillsawa_edge
+networks:
+  tillsawa_edge:
+    external: true
+    name: tillsawa_edge

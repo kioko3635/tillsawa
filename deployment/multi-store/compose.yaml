@@ -1,0 +1,62 @@
+services:
+  database:
+    image: postgres:16-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: kenya_pos_hub
+      POSTGRES_USER: pos_bootstrap
+      POSTGRES_PASSWORD: ${POS_DB_ADMIN_PASSWORD:?Generate the hosting .env first}
+      POS_APP_PASSWORD: ${POS_APP_PASSWORD:?Generate the hosting .env first}
+      POS_SYSTEM_PASSWORD: ${POS_SYSTEM_PASSWORD:?Generate the hosting .env first}
+    volumes:
+      - database:/var/lib/postgresql/data
+      - ./init-database.sh:/docker-entrypoint-initdb.d/10-pos.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pos_bootstrap -d kenya_pos_hub"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  hub:
+    build:
+      context: ../..
+      dockerfile: deployment/multi-store/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://kenya_pos_app:${POS_APP_PASSWORD}@database:5432/kenya_pos_hub
+      DATABASE_SYSTEM_URL: postgresql://pos_system:${POS_SYSTEM_PASSWORD}@database:5432/kenya_pos_hub
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET:?Generate the hosting .env first}
+      REFRESH_TOKEN_PEPPER: ${REFRESH_TOKEN_PEPPER:?Generate the hosting .env first}
+      CSRF_SECRET: ${CSRF_SECRET:?Generate the hosting .env first}
+      CORS_ORIGIN: https://${POS_DOMAIN:?Set the dashboard domain}
+      COOKIE_SECURE: "true"
+      TRUST_PROXY: "true"
+      EXPOSE_DEV_TOKENS: "false"
+      PAYMENT_TEST_MODE: "false"
+      POS_LICENSE_REQUIRED: "false"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4000/api/v1/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+  gateway:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      hub:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      POS_DOMAIN: ${POS_DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - certificates:/data
+      - gateway_config:/config
+volumes:
+  database:
+  certificates:
+  gateway_config:

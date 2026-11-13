@@ -1,0 +1,48 @@
+{
+  "name": "kenya-pos-platform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/api",
+    "apps/web",
+    "packages/contracts"
+  ],
+  "engines": {
+    "node": ">=22.0.0 <26.0.0",
+    "npm": ">=10.0.0"
+  },
+  "scripts": {
+    "start:local": "node scripts/start-local.mjs",
+    "backup:local": "node scripts/backup-local.mjs",
+    "test:local-tools": "node --test scripts/local-tools.test.mjs",
+    "test:backup": "node scripts/verify-backup.mjs",
+    "dev": "npm run build --workspace @pos/contracts && concurrently \"npm run dev --workspace @pos/api\" \"npm run dev --workspace @pos/web\"",
+    "dev:api": "npm run build --workspace @pos/contracts && npm run dev --workspace @pos/api",
+    "dev:web": "npm run dev --workspace @pos/web",
+    "build": "npm run build --workspace @pos/contracts && npm run build --workspace @pos/api && npm run build --workspace @pos/web",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "npm run build --workspace @pos/contracts && npm run typecheck --workspace @pos/contracts && npm run typecheck --workspace @pos/api && npm run typecheck --workspace @pos/web",
+    "test": "npm run test --workspace @pos/contracts && npm run test --workspace @pos/api && npm run test --workspace @pos/web",
+    "test:api": "npm run test:integration --workspace @pos/api",
+    "test:migrations": "npm run test:migrations --workspace @pos/api",
+    "test:e2e": "npm run build && playwright test",
+    "db:migrate": "npm run db:migrate --workspace @pos/api",
+    "db:migrate:test": "npm run db:migrate:test --workspace @pos/api",
+    "db:status": "npm run db:status --workspace @pos/api",
+    "db:status:test": "npm run db:status:test --workspace @pos/api",
+    "db:seed:demo": "npm run db:seed:demo --workspace @pos/api --"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.55.1",
+    "@types/node": "22.15.21",
+    "concurrently": "9.1.2",
+    "eslint": "10.12.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.7",
+    "globals": "15.15.0",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.71.2"
+  }
+}

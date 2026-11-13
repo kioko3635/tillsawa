@@ -1,0 +1,7 @@
+{$POS_DOMAIN} {
+  reverse_proxy tillsawa-owner-reporting:4000
+}
+
+{$POS_CHECKOUT_DOMAIN} {
+  reverse_proxy tillsawa-cloud-checkout:4000
+}

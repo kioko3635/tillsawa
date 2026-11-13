@@ -1,0 +1,19 @@
+# Apply with compose.yaml and a separate project name/volume (see CLOUD-POS.md).
+services:
+  hub:
+    environment:
+      MULTI_STORE_HUB: "false"
+      POS_CLOUD: "true"
+      POS_LICENSE_REQUIRED: "true"
+      POS_INSTALLATION_ID: ${POS_INSTALLATION_ID:?Generate stable cloud licence identity}
+      POS_MACHINE_ID: ${POS_MACHINE_ID:?Generate stable cloud machine identity}
+      POS_MANAGEMENT_PASSWORD: ${POS_MANAGEMENT_PASSWORD:?Generate a private management password}
+      POS_CLOUD_SETUP_KEY: ${POS_CLOUD_SETUP_KEY:-}
+      PESAPAL_TERMINAL_API_KEY: ${PESAPAL_TERMINAL_API_KEY:-}
+      PESAPAL_ORGANIZATION_ID: ${PESAPAL_ORGANIZATION_ID:-}
+      PAYMENT_TEST_MODE: ${PAYMENT_TEST_MODE:-false}
+      DARAJA_CONSUMER_KEY: ${DARAJA_CONSUMER_KEY:-}
+      DARAJA_CONSUMER_SECRET: ${DARAJA_CONSUMER_SECRET:-}
+      DARAJA_PASSKEY: ${DARAJA_PASSKEY:-}
+      DARAJA_SHORTCODE: ${DARAJA_SHORTCODE:-}
+      DARAJA_CALLBACK_URL: ${DARAJA_CALLBACK_URL:-}

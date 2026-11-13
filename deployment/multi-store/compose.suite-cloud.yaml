@@ -1,0 +1,15 @@
+# Add after compose.cloud.yaml for the checkout project.
+services:
+  hub:
+    networks:
+      default: {}
+      tillsawa_edge:
+        aliases:
+          - tillsawa-cloud-checkout
+  gateway:
+    profiles:
+      - standalone-gateway
+networks:
+  tillsawa_edge:
+    external: true
+    name: tillsawa_edge

@@ -1,0 +1,38 @@
+/* Shared layout rhythm for back office, local tills and hosted checkout. */
+.app-shell .nav-section { margin-bottom: 14px; }
+.app-shell .nav-heading { padding-block: 4px; }
+.app-shell .nav-section a { min-height: 37px; }
+.app-shell .topbar-status { white-space: nowrap; }
+.owner-dashboard .workspace-sales-trend { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 16px; }
+.workspace-sales-trend li { display: grid; grid-template-columns: 3.2rem minmax(1rem, 1fr) max-content; align-items: center; gap: 12px; font-variant-numeric: tabular-nums; }
+.workspace-sales-trend time { color: #465b73; }
+.workspace-trend-track { height: 10px; border-radius: 8px; background: #eaf0f7; overflow: hidden; }
+.workspace-trend-track span { display: block; height: 100%; border-radius: inherit; background: #326997; }
+.pos-workspace .pos-mobile-cart { display: none; }
+@media (max-width: 760px) {
+  .pos-workspace .pos-cart-panel { order: 0; scroll-margin-top: 86px; }
+  .pos-workspace .pos-mobile-cart { display: flex; position: sticky; top: 74px; align-self: start; justify-self: end; z-index: 4; box-shadow: 0 3px 12px #0a21362e; }
+  .workspace-sales-trend li { gap: 8px; font-size: .83rem; }
+}
+@media (min-width: 2000px) { .app-shell .nav-section a { min-height: 46px; } }
+@media print { .pos-workspace .pos-mobile-cart { display: none !important; } }
+.pos-payment-station { display: grid; gap: 12px; scroll-margin-top: 12px; }
+.pos-payment-station:focus-visible { outline: 2px solid #326997; outline-offset: 4px; }
+.pos-payment-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.pos-payment-heading h3 { margin: 0; font-size: 1rem; }
+.pos-payment-heading > span { background: #edf2f8; color: #354c66; padding: 3px 7px; border-radius: 5px; font-size: .75rem; }
+.pos-cart-panel .pos-payment-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; background: transparent; padding: 0; }
+.pos-cart-panel .pos-payment-tiles button { min-height: 58px; display: flex; align-items: center; gap: 8px; text-align: left; padding: 8px 10px; border: 1px solid #d3dee8; border-radius: 10px; background: #fff; color: #243c55; }
+.pos-cart-panel .pos-payment-tiles button.active { border-color: #326997; background: #edf5fc; box-shadow: inset 0 0 0 1px #326997; }
+.pos-payment-tiles .ui-icon { flex: 0 0 21px; height: 21px; }
+.pos-payment-tiles strong, .pos-payment-tiles small { display: block; }
+.pos-payment-tiles small { font-size: .7rem; font-weight: 500; color: #425b72; }
+.pos-electronic-flow, .pos-payment-details[open] { display: grid; gap: 10px; }
+.pos-electronic-flow p { margin: 0; font-size: .85rem; line-height: 1.45; overflow-wrap: anywhere; }
+.pos-electronic-flow .field-label select { width: 100%; }
+.pos-payment-details { font-size: .84rem; color: #344c65; }
+.pos-payment-details summary { cursor: pointer; min-height: 28px; }
+.pos-payment-result { display: grid; gap: 4px; background: #fff5df; border: 1px solid #ead0a1; border-radius: 10px; padding: 10px 12px; color: #553716; }
+.pos-payment-result[data-status="paid"] { background: #edf7f0; border-color: #b8dac5; color: #174a30; }
+.pos-payment-result > div { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; }
+@media (max-width: 760px) { .pos-payment-station { scroll-margin-top: 84px; } }
